@@ -1,0 +1,18 @@
+<h1>Register</h1>
+
+<div class="col-sm-12 col-md-8 col-lg-6">
+    <form name="form" class="form" novalidate>
+        <div class="form-group">
+            <label for='teamNameInput'>Team Name:</label>
+            <input required type="text" id='teamNameInput' class='form-control' ng-model='team.name'>
+        </div>
+        <div class="form-group">
+            <label for='teamMemberName1'>Team Members:</label>
+            <input required type="text" id='teamMemberName1' class='form-control' ng-model='team.member1'>
+            <label for='teamMemberName2'>and</label>
+            <input required type="text" id='teamMemberName2' class='form-control' ng-model='team.member2'>
+        </div>
+    </form>
+
+    <button type="submit" class="btn btn-default" ng-click="registerTeam()" ng-disabled="form.$invalid">Register</button>
+</div>
