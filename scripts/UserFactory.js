@@ -25,6 +25,9 @@ angular.module("myApp").factory( "UserFactory", function(Facebook) {
       Facebook.api('/me', function(response) {
         UserFactory.user = response;
       });
+      Facebook.api('/me/picture', function(response) {
+        UserFactory.user.picture = response;
+      });
     };
 
     /**

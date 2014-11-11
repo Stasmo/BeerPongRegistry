@@ -1,7 +1,46 @@
-<h1>Register</h1>
+<div class="col-sm-12 col-md-4 col-lg-6">
+	<h2>Want to play?</h2>
+	<p>So you think you have what it takes to throw little plastic balls into plastic cups, do ya? Good! Entering the beer pong tournament is really simple.</p>
 
-<div class="col-sm-12 col-md-8 col-lg-6">
+	<div class="media steps-list">
+	    <img class="pull-right media-object" src="img/fb_icon_325x325.png" height="50px" width="50px">
+	  
+	  <div class="media-body">
+	    <h4 class="media-heading">Step 1</h4>
+	    Login with your Facebook account
+	  </div>
+	</div>
+	<div class="media steps-list">
+	    <span class="pull-right glyphicon glyphicon-list-alt" style="color: #3b5998; font-size: 50px;"></span>
+	  
+	  <div class="media-body">
+	    <h4 class="media-heading">Step 2</h4>
+	    Sign up for the tournament
+	  </div>
+	</div>
+	<div class="media steps-list">
+	    <span class="pull-right glyphicon glyphicon-user" style="color: #3b5998;font-size: 25px; margin-top: 12px"></span>
+	    
+	    <span class="pull-right glyphicon glyphicon-user" style="color: #3b5998;font-size: 25px; margin-top: 12px"></span>
+	  
+	  <div class="media-body">
+	    <h4 class="media-heading">Step 3</h4>
+	    Register a team with a buddy, or find a random partner
+	  </div>
+	</div>
+    <h2>Debug shit</h2>
 
     <div>User</div>
     {{ userFactory.user | json }}
+</div>
+<div class="col-md-8 col-lg-6">
+	<div class="step">
+		<h2>Step 2</h2>
+    	<button class="btn btn-default" ng-click="register()" ng-show="canRegister">Sign me up</button>
+	</div>
+	<div class="free-agents">
+		<div class="free-agent" ng-repeat="agent in freeAgents">
+			<h3>{{ agent.name }}</h3>
+		</div>
+	</div>
 </div>

@@ -1,9 +1,18 @@
 angular.module("myApp")
-.config( function() {
-    Parse.initialize("kuqd7BoPMkP24oV3jr9RDyzurQwLCJ3CcH7OjHLu", "76CDjNfuHSroUU6V1f4om0sUGjr1TFkN0Vf4auIg");
-})
 .controller('RegistryController', ['$scope', 'UserFactory', function($scope, UserFactory) {
     
-    $scope.userFactory = UserFactory;
-    
+    (function(){
+    	$scope.userFactory = UserFactory;
+    	$scope.registered  = false;
+    }())
+
+    $scope.register = function() {
+    	var reg = new Registrant();
+    	reg.set("name", UserFactory.user.name);
+    	reg.set("facebookId", UserFactory.user.id);
+    	reg.set("profileThumbnail", UserFactory.user.picture.data.is_silhouette ? "" : UserFactory.user.picture.data.url);
+    	reg.save().then(function(){
+    		console.log('saved')
+    	})
+    }
 }])

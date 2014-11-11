@@ -1,6 +1,19 @@
+/* 
+
+font-family: Pacifico;
+font-family: Lobster;
+font-family: 'Special Elite';
+
+*/
+
 body {
     background-color: #333;
     color: #fff;
+}
+
+h1,h2,h3,h4,h5,h6 {
+	font-family: 'Special Elite';
+	color: #c00;
 }
 
 #facebookLogin {
@@ -8,4 +21,31 @@ body {
     font-size: 1.5em;
     padding: .5em;
     color: #222;
+
+	font-family: 'Special Elite';
+}
+
+#facebookLogin .profilePicture {
+	border-radius: 5px;
+	height: 34px;
+	width: 34px;
+}
+
+
+.media.steps-list {
+	background-color: #ddd;
+	color: #444;
+	border-radius: 1em;
+	padding: 2em;
+}
+
+.steps-list:hover {
+	background-color: #fff;
+	box-shadow: 0px 2px 5px black;
+}
+
+.steps-list .media-heading {
+	color: #222;
+	font-size: 2em;
+	font-family: Lobster;
 }
