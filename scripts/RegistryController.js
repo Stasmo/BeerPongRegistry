@@ -30,10 +30,15 @@ angular.module("myApp")
                 }
                 $scope.$apply (function() {
                     $scope.user.parse = Parse.User.current();
-                    $scope.user.facebook = facebook;
                     $scope.loggedIn = true;
                     $scope.getUserTeam($scope.user.parse.id);
                 });
+                
+                FB.api('/me', function(res){
+                    $scope.$apply(function(){
+                        $scope.user.facebook = res;
+                    })
+                })
             },
             error: function(user, error) {
               alert("User cancelled the Facebook login or did not fully authorize.");
