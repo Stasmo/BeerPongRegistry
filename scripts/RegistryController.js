@@ -60,14 +60,6 @@ angular.module("myApp")
                 $scope.createError = "Team name already exists";
                 console.log('error')
             } else {
-                var myTeam = new ParseFactory.Team($scope.teamToCreate);
-                myTeam.set('a', $scope.user.parse.id);
-                myTeam.set('aName', $scope.user.facebook.name);
-                myTeam.save().then(function(){
-                    $scope.success = "Created new team '" + myTeam.get('name') + "'"
-                });
-                $scope.user.team = myTeam;
-                $scope.user.needsTeam = false;
 
                 FB.api(
                     "/me/picture",
@@ -80,8 +72,16 @@ angular.module("myApp")
                     function (response) {
                         console.log(response)
                       if (response && !response.error) {
-                        myTeam.set('aPic', response.data.url);
-                        myTeam.save();
+                        var myTeam = new ParseFactory.Team($scope.teamToCreate)
+                            .set('a', $scope.user.parse.id)
+                            .set('aName', $scope.user.facebook.name)
+                            .set('aPic', response.data.url)
+                            .save()
+                            .then(function(){
+                                $scope.success = "Created new team '" + myTeam.get('name') + "'"
+                            });
+                        $scope.user.team = myTeam;
+                        $scope.user.needsTeam = false;
                       }
                     }
                 );
