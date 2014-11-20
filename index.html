@@ -7,26 +7,23 @@
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-    <div id="facebookLogin" ng-controller="FacebookLoginController" class="text-right">
-        <span ng-show="userFactory.loggedIn">{{ userFactory.user.name }}</span>
-        <span ng-show="userFactory.loggedIn"><img class="profilePicture" ng-src="{{ userFactory.user.picture.data.url }}"></span>
-        <button class="btn btn-default" ng-hide="userFactory.loggedIn" ng-click="userFactory.login()">Login</button>
-        <button class="btn btn-default" ng-show="userFactory.loggedIn" ng-click="userFactory.logout()">Logout</button>
-    </div>
-    <div class="container" ng-view="">
+
+    <div class="background-image"></div>
+    <div class="container" id="view" ng-view="">
     </div>
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.js"></script>
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular-route.js"></script>
-    <script type="text/javascript" src="bower_components/angular-facebook/lib/angular-facebook.js"></script>
-    <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.3.1.min.js"></script>
+    <script type="text/javascript" src="scripts/fbsdk.js"></script>
+    <script type="text/javascript" src="//www.parsecdn.com/js/parse-1.3.1.min.js"></script>
+    <script type="text/javascript" src="scripts/ParseInit.js"></script>
+    <script type="text/javascript" src="bower_components/parse-angular-patch/src/parse-angular.js"></script>
     <script type="text/javascript" src="modules.js"></script>
     <script type="text/javascript" src="scripts/ParseFactory.js"></script>
     <script type="text/javascript" src="scripts/UserFactory.js"></script>
     <script type="text/javascript" src="scripts/TeamFactory.js"></script>
-    <script type="text/javascript" src="scripts/FacebookLoginController.js"></script>
     <script type="text/javascript" src="scripts/RegistryController.js"></script>
 </body>
 </html>

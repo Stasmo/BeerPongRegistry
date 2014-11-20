@@ -17,6 +17,6 @@
     "tests"
   ],
   "dependencies": {
-    "angular-facebook": "~0.2.3"
+    "parse-angular-patch": "*"
   }
 }

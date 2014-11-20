@@ -1,8 +1,7 @@
-angular.module("myApp").factory( "UserFactory", function(Facebook) {
+angular.module("myApp").factory("UserFactory", function(ParseFactory) {
     UserFactory = {};
     // Define user empty data :/
     UserFactory.user = {};
-
     // Defining user loggedIn status
     UserFactory.loggedIn = false;
 
@@ -10,10 +9,17 @@ angular.module("myApp").factory( "UserFactory", function(Facebook) {
     * Login
     */
     UserFactory.login = function() {
-      Facebook.login(function(response) {
-        if (response.status == 'connected') {
+      console.log('login')
+      ParseFactory.Parse.FacebookUtils.logIn(null, {
+        success: function(user) {
+          if (!user.existed()) {
+          } else {
+          }
+          UserFactory.user = user;
           UserFactory.loggedIn = true;
-          UserFactory.me();
+        },
+        error: function(user, error) {
+          alert("User cancelled the Facebook login or did not fully authorize.");
         }
       });
     };
@@ -22,11 +28,11 @@ angular.module("myApp").factory( "UserFactory", function(Facebook) {
     * me 
     */
     UserFactory.me = function() {
-      Facebook.api('/me', function(response) {
+      FB.api('/me', function(response) {
         UserFactory.user = response;
       });
-      Facebook.api('/me/picture', function(response) {
-        UserFactory.user.picture = response;
+      FB.api('/me/picture', function(response) {
+        UserFactory.picture = response;
       });
     };
 
@@ -34,20 +40,20 @@ angular.module("myApp").factory( "UserFactory", function(Facebook) {
     * Logout
     */
     UserFactory.logout = function() {
-      Facebook.logout(function() {
-          UserFactory.user   = {};
-          UserFactory.loggedIn = false;
-      });
-    }
-
-    (function(){
-        Facebook.getLoginStatus(function(response) {
-          if (response.status == 'connected') {
-            UserFactory.loggedIn = true;
-            UserFactory.me();
+      console.log('Logout')
+      ParseFactory.Parse.User.logOut(null, {
+          success: function() {
+              UserFactory.user   = {};
+              UserFactory.loggedIn = false;
+          },
+          error: function(err) {
+            alert('logout error');
           }
-        });
-    }());
+      });
+    };
+
+    UserFactory.init = function() {
+    };
 
     return UserFactory;
 });
