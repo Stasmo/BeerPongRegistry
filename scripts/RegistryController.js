@@ -138,7 +138,6 @@ angular.module("myApp")
         var q = new Parse.Query(ParseFactory.Team);
         q.equalTo("name", $scope.joinTeamName);
         q.find().then(function(res){
-            console.log(res)
             if (res.length > 1) {
                 $scope.error = "An error ocurred while trying to join the team";
             } else if (res.length == 1) {
