@@ -148,9 +148,9 @@ angular.module("myApp")
                     },
                     function (response) {
                       if (response && !response.error) {
-                        team.set('b', $scope.user.parse.id);
-                            .set('bPic', response.data.url);
-                            .set('bName', $scope.user.facebook.name);
+                        team.set('b', $scope.user.parse.id)
+                            .set('bPic', response.data.url)
+                            .set('bName', $scope.user.facebook.name)
                             .save()
                             .then(function(){
                                 $scope.user.team = team;
