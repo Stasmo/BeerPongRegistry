@@ -140,10 +140,12 @@ angular.module("myApp")
         q.find().then(function(res){
             if (res.length > 1) {
                 $scope.error = "An error ocurred while trying to join the team";
+                return;
             } else if (res.length == 1) {
                 var team = res[0];
                 if (team.get('b')) {
                     $scope.error = "This team is full";
+                    return;
                 }
                 FB.api(
                     "/me/picture",
