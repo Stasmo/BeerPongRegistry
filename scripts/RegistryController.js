@@ -33,7 +33,7 @@ angular.module("myApp")
                     $scope.loggedIn = true;
                     $scope.getUserTeam($scope.user.parse.id);
                 });
-                
+
                 FB.api('/me', function(res){
                     $scope.$apply(function(){
                         $scope.user.facebook = res;
@@ -143,6 +143,9 @@ angular.module("myApp")
                 $scope.error = "An error ocurred while trying to join the team";
             } else if (res.length == 1) {
                 var team = res[0];
+                if (team.get('b')) {
+                    $scope.error = "This team is full";
+                }
                 FB.api(
                     "/me/picture",
                     {
