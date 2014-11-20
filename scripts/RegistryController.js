@@ -75,8 +75,9 @@ angular.module("myApp")
                         var myTeam = new ParseFactory.Team($scope.teamToCreate)
                             .set('a', $scope.user.parse.id)
                             .set('aName', $scope.user.facebook.name)
-                            .set('aPic', response.data.url)
-                            .save()
+                            .set('aPic', response.data.url);
+
+                        myTeam.save()
                             .then(function(){
                                 $scope.success = "Created new team '" + myTeam.get('name') + "'"
                             });
@@ -112,6 +113,7 @@ angular.module("myApp")
             },
             function (response) {
               if (response && !response.error) {
+                console.log($scope.user.facebook);
                 team.set('b', $scope.user.parse.id)
                     .set('bPic', response.data.url)
                     .set('bName', $scope.user.facebook.name)
@@ -147,13 +149,14 @@ angular.module("myApp")
                     function (response) {
                       if (response && !response.error) {
                         team.set('b', $scope.user.parse.id);
-                        team.set('bPic', response.data.url);
-                        team.set('bName', $scope.user.facebook.name);
-                        team.save().then(function(){
-                            $scope.user.team = team;
-                            $scope.user.needsTeam = false;
-                            $scope.success = "Joined team '" + team.get('name') + "'"
-                        });
+                            .set('bPic', response.data.url);
+                            .set('bName', $scope.user.facebook.name);
+                            .save()
+                            .then(function(){
+                                $scope.user.team = team;
+                                $scope.user.needsTeam = false;
+                                $scope.success = "Joined team '" + team.get('name') + "'"
+                            });
                       }
                     }
                 );
