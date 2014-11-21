@@ -17,36 +17,40 @@
 <div class="alert alert-success" ng-show="success" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>{{ success }}</div>
 <div class="alert alert-danger" ng-show="error" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>{{ error }}</div>
 
+<div class="row">
+	<div class="col-sm-12 col-md-6" ng-hide="loggedIn">
+		<h1 class='text-large'>Got what it takes?</h1>
+		<p>So you think you have what it takes to throw little plastic balls into plastic cups, do ya? Good! Entering the beer pong tournament is really simple and <strong>free</strong>.</p>
 
-<div class="col-sm-12" ng-hide="loggedIn">
-	<h2>Want to play?</h2>
-	<p>So you think you have what it takes to throw little plastic balls into plastic cups, do ya? Good! Entering the beer pong tournament is really simple.</p>
+		<div class="media steps-list" ng-click="login()">
+			<img class="pull-right media-object" src="img/fb_icon_325x325.png" height="50px" width="50px">
 
-	<div class="media steps-list">
-		<img class="pull-right media-object" src="img/fb_icon_325x325.png" height="50px" width="50px">
+			<div class="media-body">
+				<h4 class="media-heading">Step 1</h4>
+				Login with your Facebook account
+			</div>
+		</div>
+		<div class="media steps-list" ng-click="login()">
+			<span class="pull-right glyphicon glyphicon-list-alt" style="color: #3b5998; font-size: 50px;"></span>
 
-		<div class="media-body">
-			<h4 class="media-heading">Step 1</h4>
-			Login with your Facebook account
+			<div class="media-body">
+				<h4 class="media-heading">Step 2</h4>
+				Sign up for the tournament
+			</div>
+		</div>
+		<div class="media steps-list" ng-click="login()">
+			<span class="pull-right glyphicon glyphicon-user" style="color: #3b5998;font-size: 25px; margin-top: 12px"></span>
+
+			<span class="pull-right glyphicon glyphicon-user" style="color: #3b5998;font-size: 25px; margin-top: 12px"></span>
+
+			<div class="media-body">
+				<h4 class="media-heading">Step 3</h4>
+				Register a team with a buddy, or find a random partner
+			</div>
 		</div>
 	</div>
-	<div class="media steps-list">
-		<span class="pull-right glyphicon glyphicon-list-alt" style="color: #3b5998; font-size: 50px;"></span>
-
-		<div class="media-body">
-			<h4 class="media-heading">Step 2</h4>
-			Sign up for the tournament
-		</div>
-	</div>
-	<div class="media steps-list">
-		<span class="pull-right glyphicon glyphicon-user" style="color: #3b5998;font-size: 25px; margin-top: 12px"></span>
-
-		<span class="pull-right glyphicon glyphicon-user" style="color: #3b5998;font-size: 25px; margin-top: 12px"></span>
-
-		<div class="media-body">
-			<h4 class="media-heading">Step 3</h4>
-			Register a team with a buddy, or find a random partner
-		</div>
+	<div class="col-sm-12 col-md-6 text-center">
+		<img src="/img/simon.png" height="700px">
 	</div>
 </div>
 
@@ -124,7 +128,7 @@
 		</div>
 	</div>
 </div>
-
+<br/>
 <div ng-show="teams.length > 0">
 	<div class="row" ng-show="!user.team.get('b') && user.team">
 		<div class="col-sm-12">
