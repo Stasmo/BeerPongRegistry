@@ -192,6 +192,7 @@ angular.module("myApp")
             $scope.user.team = {};
             $scope.user.needsTeam = true;
         });
+        $scope.getExistingTeams();
     }
 
     $scope.getUserTeam = function(id) {
