@@ -102,34 +102,19 @@ angular.module("myApp")
         }
 
         if ($scope.user.team != null) {
-            console.log($scope.user.team)
             $scope.error = "You already have a team";
             return;
         }
 
-        FB.api(
-            "/me/picture",
-            {
-                "redirect": false,
-                "height": "200",
-                "type": "normal",
-                "width": "200"
-            },
-            function (response) {
-              if (response && !response.error) {
-                console.log($scope.user.facebook);
-                team.set('b', $scope.user.parse.id)
-                    .set('bPic', response.data.url)
-                    .set('bName', $scope.user.facebook.name)
-                    .save()
-                    .then(function(){
-                        $scope.user.team = team;
-                        $scope.user.needsTeam = false;
-                        $scope.success = "Joined team '" + team.get('name') + "'"
-                    });
-              }
-            }
-        );
+        team.set('b', $scope.user.parse.id)
+            .set('bPic', $scope.user.facebook.pic)
+            .set('bName', $scope.user.facebook.name)
+            .save()
+            .then(function(){
+                $scope.user.team = team;
+                $scope.user.needsTeam = false;
+                $scope.success = "Joined team '" + team.get('name') + "'"
+            });
     }
 
     $scope.joinTeamByName = function()
@@ -146,28 +131,16 @@ angular.module("myApp")
                     $scope.error = "This team is full";
                     return;
                 }
-                FB.api(
-                    "/me/picture",
-                    {
-                        "redirect": false,
-                        "height": "200",
-                        "type": "normal",
-                        "width": "200"
-                    },
-                    function (response) {
-                      if (response && !response.error) {
-                        team.set('b', $scope.user.parse.id)
-                            .set('bPic', response.data.url)
-                            .set('bName', $scope.user.facebook.name)
-                            .save()
-                            .then(function(){
-                                $scope.user.team = team;
-                                $scope.user.needsTeam = false;
-                                $scope.success = "Joined team '" + team.get('name') + "'"
-                            });
-                      }
-                    }
-                );
+
+                team.set('b', $scope.user.parse.id)
+                    .set('bPic', $scope.user.facebook.pic)
+                    .set('bName', $scope.user.facebook.name)
+                    .save()
+                    .then(function(){
+                        $scope.user.team = team;
+                        $scope.user.needsTeam = false;
+                        $scope.success = "Joined team '" + team.get('name') + "'"
+                    });
             } else {
                 $scope.error = "Couldn't find that team. Make sure you're using the case. XxXMyTeamXxX will not match xxxmyteamxxx.";
             }
