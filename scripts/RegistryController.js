@@ -49,7 +49,7 @@ angular.module("myApp")
     $scope.register = function()
     {
         $scope.user.parse.set('registered', true);
-        $scope.user.parse.set('facebook', $scope.user.parse.facebook);
+        $scope.user.parse.set('facebook', $scope.user.facebook);
         $scope.user.parse.save({
             success: function() {
                 //display a nice message or something
