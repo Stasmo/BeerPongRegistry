@@ -6,6 +6,7 @@
 			<button ng-click="deleteTeam()" class="btn btn-default" ng-show="user.team && user.parse.id == user.team.get('a')">Delete team</button>
 			<button ng-click="makePublic()" ng-show="user.team && user.parse.id == user.team.get('a') && !user.team.get('public')" class="btn btn-default" >Make my team public</button>
 			<button ng-click="makePrivate()" ng-show="user.team && user.parse.id == user.team.get('a') && user.team.get('public')" class="btn btn-default" >Make my team private</button>
+			<span ng-show="user.team.get('name')">Team Name: {{ user.team.get('name') }}</span>
 		</div>
 		<div class="col-sm-6 text-right">
 			<span ng-show="loggedIn">{{ user.facebook.name }}</span>
