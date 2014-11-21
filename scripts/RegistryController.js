@@ -152,7 +152,7 @@ angular.module("myApp")
         $scope.user.team.unset('b').unset('bPic').unset('bName').save().then(function(){
             $scope.user.team = null;
             $scope.user.needsTeam = true;
-            $scope.success = "Left team"
+            $scope.success = "Left team";
             $scope.getExistingTeams();
             $scope.getPublicTeams();
         });
@@ -193,6 +193,16 @@ angular.module("myApp")
         q.exists('b');
         q.find().then(function(res) {
             $scope.teams = res;
+            var ids = [];
+            for (i in res) {
+                ids[i*2] = res[i].get('a');
+                ids[i*2 + 1] = res[i].get('b');
+            }
+            var q2 = new Parse.Query(ParseFactory.User);
+            q2.notContainedIn('objectId', ids)
+                .find().then(function(res){
+                    $scope.freeAgents = res;
+                })
         });
     }
 
@@ -224,13 +234,14 @@ angular.module("myApp")
         })
     }
 
-    $scope.getFreeAgents = function()
-    {
-        var q = new Parse.Query(ParseFactory.User);
-        q.find().then(function(res){
-            $scope.freeAgents = res;
-        })
-    }
+    // $scope.getFreeAgents = function()
+    // {
+    //     var values = [];
+    //     var q = new Parse.Query(ParseFactory.User);
+    //     q.find().then(function(res){
+    //         $scope.freeAgents = res;
+    //     })
+    // }
 
 
     function init(){
@@ -239,7 +250,6 @@ angular.module("myApp")
         $scope.teamToCreate = {};
         $scope.getExistingTeams();
         $scope.getPublicTeams();
-        $scope.getFreeAgents();
 
         FB.getLoginStatus(function(response) {
             if (response.status === 'connected' && Parse.User.current() != null) {
