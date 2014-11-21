@@ -17,8 +17,8 @@
 <div class="alert alert-success" ng-show="success" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>{{ success }}</div>
 <div class="alert alert-danger" ng-show="error" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>{{ error }}</div>
 
-<div class="row">
-	<div class="col-sm-12 col-md-6" ng-hide="loggedIn">
+<div class="row" ng-hide="loggedIn">
+	<div class="col-sm-12 col-md-6">
 		<h1 class='text-large'>Got what it takes?</h1>
 		<p>So you think you have what it takes to throw little plastic balls into plastic cups, do ya? Good! Entering the beer pong tournament is really simple and <strong>free</strong>.</p>
 
@@ -137,9 +137,10 @@
 			<p ng-hide="user.team.get('public')">Your team is currently private. Members will have to type the team name exactly as you created it to join.</p>
 		</div>
 	</div>
+	<br/>
 	<h2>Check out the competition</h2>
 	<div class="row">
-		<div class="col-sm-6 col-md-6 col-lg-4 existing-team" ng-repeat="team in teams">
+		<div class="col-sm-6 col-lg-4 existing-team" ng-repeat="team in teams">
 			<h2>TEAM:  {{ team.get('name') }}</h2>
 				<div class="row">
 					<div class="col-sm-6 col-md-6">
@@ -162,5 +163,29 @@
 			</div>
 		</div>
 	</div>
-
+	<h2>Free Agents</h2>
+	<div class="row">
+		<div class="col-sm-3 col-lg-2 existing-team" ng-repeat="user in freeAgents">
+			<h2>TEAM:  {{ user.get('name') }}</h2>
+				<div class="row">
+					<div class="col-sm-6 col-md-6">
+						<div class="thumbnail">
+							<img ng-src="{{ team.get('aPic')}}" alt="...">
+							<div class="caption text-center">
+								<h4>{{ team.get('aName') }}</h4>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6 col-md-6">
+						<div class="thumbnail">
+							<img ng-src="{{ team.get('bPic')}}" alt="...">
+							<div class="caption text-center">
+								<h4>{{ team.get('bName') }}</h4>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

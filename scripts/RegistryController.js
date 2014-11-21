@@ -49,6 +49,7 @@ angular.module("myApp")
     $scope.register = function()
     {
         $scope.user.parse.set('registered', true);
+        $scope.user.parse.set('facebook', $scope.user.parse.facebook);
         $scope.user.parse.save({
             success: function() {
                 //display a nice message or something
@@ -220,8 +221,6 @@ angular.module("myApp")
         var q = new Parse.Query(ParseFactory.Team);
         q.exists('b');
         q.find().then(function(res) {
-            console.log(1)
-            console.log(res)
             $scope.teams = res;
         });
     }
@@ -256,6 +255,15 @@ angular.module("myApp")
         })
     }
 
+    $scope.getFreeAgents = function()
+    {
+        var q = new Parse.Query(ParseFactory.User);
+        q.find().then(function(res){
+            $scope.freeAgents = res;
+            console.log(res)
+        })
+    }
+
 
     function init(){
         $scope.loggedIn = false;
@@ -263,6 +271,7 @@ angular.module("myApp")
         $scope.teamToCreate = {};
         $scope.getExistingTeams();
         $scope.getPublicTeams();
+        $scope.getFreeAgents();
 
         FB.getLoginStatus(function(response) {
             if (response.status === 'connected' && Parse.User.current() != null) {
