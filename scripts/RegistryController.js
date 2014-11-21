@@ -273,7 +273,7 @@ angular.module("myApp")
                 $scope.$apply(function(){
                     $scope.loggedIn = true;
                     $scope.user.parse = Parse.User.current();
-                    $scope.user.facebook = $scope.user.get('facebook');
+                    $scope.user.facebook = $scope.user.parse.get('facebook');
                     $scope.getUserTeam($scope.user.parse.id);
                 })
             }
