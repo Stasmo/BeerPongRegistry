@@ -189,7 +189,7 @@ angular.module("myApp")
     $scope.deleteTeam = function()
     {
         $scope.user.team.destroy().then(function(){
-            $scope.user.team = {};
+            $scope.user.team = undefined;
             $scope.user.needsTeam = true;
         });
         $scope.getExistingTeams();
