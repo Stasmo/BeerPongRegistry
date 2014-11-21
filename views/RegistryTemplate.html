@@ -166,22 +166,12 @@
 	<h2>Free Agents</h2>
 	<div class="row">
 		<div class="col-sm-3 col-lg-2 existing-team" ng-repeat="user in freeAgents">
-			<h2>TEAM:  {{ user.get('name') }}</h2>
-				<div class="row">
-					<div class="col-sm-6 col-md-6">
-						<div class="thumbnail">
-							<img ng-src="{{ team.get('aPic')}}" alt="...">
-							<div class="caption text-center">
-								<h4>{{ team.get('aName') }}</h4>
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-6 col-md-6">
-						<div class="thumbnail">
-							<img ng-src="{{ team.get('bPic')}}" alt="...">
-							<div class="caption text-center">
-								<h4>{{ team.get('bName') }}</h4>
-							</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="thumbnail">
+						<img ng-src="{{ user.facebook.pic }}" alt="...">
+						<div class="caption text-center">
+							<h4>{{ user.facebook.name }}</h4>
 						</div>
 					</div>
 				</div>

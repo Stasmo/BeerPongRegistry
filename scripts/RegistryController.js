@@ -48,13 +48,27 @@ angular.module("myApp")
     
     $scope.register = function()
     {
-        $scope.user.parse.set('registered', true);
-        $scope.user.parse.set('facebook', $scope.user.facebook);
-        $scope.user.parse.save({
-            success: function() {
-                //display a nice message or something
+        FB.api(
+            "/me/picture",
+            {
+                "redirect": false,
+                "height": "200",
+                "type": "normal",
+                "width": "200"
+            },
+            function (response) {
+              if (response && !response.error) {
+                $scope.user.facebook.pic = response.data.url;
+                $scope.user.parse.set('registered', true);
+                $scope.user.parse.set('facebook', $scope.user.facebook);
+                $scope.user.parse.save({
+                    success: function() {
+                        //display a nice message or something
+                    }
+                });
+              }
             }
-        });
+        );
     }
 
     $scope.createTeam = function()
@@ -63,35 +77,19 @@ angular.module("myApp")
         q.equalTo("name", $scope.teamToCreate.name);
         q.count().then(function(c) {
             if (c > 0) {
-                $scope.createError = "Team name already exists";
-                console.log('error')
+                $scope.error = "Team name already exists";
             } else {
+                var myTeam = new ParseFactory.Team($scope.teamToCreate)
+                    .set('a', $scope.user.parse.id)
+                    .set('aName', $scope.user.facebook.name)
+                    .set('aPic', $scope.user.facebook.pic);
 
-                FB.api(
-                    "/me/picture",
-                    {
-                        "redirect": false,
-                        "height": "200",
-                        "type": "normal",
-                        "width": "200"
-                    },
-                    function (response) {
-                        console.log(response)
-                      if (response && !response.error) {
-                        var myTeam = new ParseFactory.Team($scope.teamToCreate)
-                            .set('a', $scope.user.parse.id)
-                            .set('aName', $scope.user.facebook.name)
-                            .set('aPic', response.data.url);
-
-                        myTeam.save()
-                            .then(function(){
-                                $scope.success = "Created new team '" + myTeam.get('name') + "'"
-                            });
-                        $scope.user.team = myTeam;
-                        $scope.user.needsTeam = false;
-                      }
-                    }
-                );
+                myTeam.save()
+                    .then(function(){
+                        $scope.success = "Created new team '" + myTeam.get('name') + "'"
+                    });
+                $scope.user.team = myTeam;
+                $scope.user.needsTeam = false;
             }
         });
     }
@@ -235,8 +233,6 @@ angular.module("myApp")
         q.equalTo("public", true);
         var q3 = Parse.Query.or(q, q2);
         q3.find().then(function(res) {
-            console.log(2);
-            console.log(res)
             $scope.publicTeams = res;
         });
     }
@@ -260,7 +256,6 @@ angular.module("myApp")
         var q = new Parse.Query(ParseFactory.User);
         q.find().then(function(res){
             $scope.freeAgents = res;
-            console.log(res)
         })
     }
 
@@ -275,13 +270,11 @@ angular.module("myApp")
 
         FB.getLoginStatus(function(response) {
             if (response.status === 'connected' && Parse.User.current() != null) {
-                $scope.loggedIn = true;
-                $scope.user.parse = Parse.User.current();
-                $scope.getUserTeam($scope.user.parse.id);
-                FB.api('/me', function(res){
-                    $scope.$apply(function(){
-                        $scope.user.facebook = res;
-                    })
+                $scope.$apply(function(){
+                    $scope.loggedIn = true;
+                    $scope.user.parse = Parse.User.current();
+                    $scope.user.facebook = $scope.user.get('facebook');
+                    $scope.getUserTeam($scope.user.parse.id);
                 })
             }
         });
